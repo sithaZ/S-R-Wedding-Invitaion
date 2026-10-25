@@ -1,0 +1,86 @@
+[
+  {
+    "name": "WeddingInfo",
+    "source": "Wedding_invi.pdf, page 2",
+    "box": [
+      0,
+      1454,
+      1125,
+      3100
+    ],
+    "master": "assets/images/WeddingInfo.png",
+    "web": "assets/images/WeddingInfo.webp",
+    "width": 1125,
+    "height": 1646
+  },
+  {
+    "name": "WeddingPic",
+    "source": "Wedding_invi.pdf, page 2",
+    "box": [
+      0,
+      3100,
+      1125,
+      6460
+    ],
+    "master": "assets/images/WeddingPic.png",
+    "web": "assets/images/WeddingPic.webp",
+    "width": 1125,
+    "height": 3360
+  },
+  {
+    "name": "WeddingDetail",
+    "source": "Wedding_invi.pdf, page 2",
+    "box": [
+      0,
+      6460,
+      1125,
+      7888
+    ],
+    "master": "assets/images/WeddingDetail.png",
+    "web": "assets/images/WeddingDetail.webp",
+    "width": 1125,
+    "height": 1428
+  },
+  {
+    "name": "EventColors",
+    "source": "Wedding_invi.pdf, page 2",
+    "box": [
+      0,
+      7888,
+      1125,
+      8350
+    ],
+    "master": "assets/images/EventColors.png",
+    "web": "assets/images/EventColors.webp",
+    "width": 1125,
+    "height": 462
+  },
+  {
+    "name": "Map",
+    "source": "Wedding_invi.pdf, page 2",
+    "box": [
+      0,
+      8350,
+      1125,
+      9270
+    ],
+    "master": "assets/images/Map.png",
+    "web": "assets/images/Map.webp",
+    "width": 1125,
+    "height": 920
+  },
+  {
+    "name": "Footer",
+    "source": "Wedding_invi.pdf, page 2",
+    "box": [
+      0,
+      9270,
+      1125,
+      9802
+    ],
+    "master": "assets/images/Footer.png",
+    "web": "assets/images/Footer.webp",
+    "width": 1125,
+    "height": 532
+  }
+]

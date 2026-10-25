@@ -1,0 +1,30 @@
+.animated-button {
+    animation: button-bounce 2.8s ease-in-out infinite;
+}
+.animated-button:hover {
+    animation-play-state: paused;
+    filter: brightness(1.08) drop-shadow(0 4px 12px #e9c564aa);
+}
+.animated-button:focus-visible {
+    outline: 3px solid #897331;
+    outline-offset: 3px;
+}
+.animated-button:active {
+    animation: none;
+    transform: scale(.97);
+}
+@keyframes button-bounce {
+    0%, 52%, 100% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 2px 4px #0003);
+    }
+    16% {
+        transform: translateY(-9px) scale(1.035);
+        filter: drop-shadow(0 8px 10px #e9c56499);
+    }
+    28% { transform: translateY(0) scale(1); }
+    39% { transform: translateY(-4px) scale(1.015); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .animated-button { animation: none; }
+}

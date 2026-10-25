@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4e5b22">
+    <meta name="description" content="Somaly & Monyroath invite you to celebrate their wedding on 9 November 2026 at The Grand Terrace.">
+    <title>សិរីមង្គលអាពាហ៍ពិពាហ៍ | Somaly & Monyroath</title>
+    <link rel="stylesheet" href="assets/css/buttons.css?v=2">
+    <style>
+        * { box-sizing: border-box; }
+        [hidden] { display: none !important; }
+        body { margin: 0; color: #4e5b22; font-family: 'Segoe UI', sans-serif; }
+        .invitation { width: 100%; max-width: 480px; margin-inline: auto; }
+        .save-the-date { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: contain; }
+        .section { margin: 0; }
+        .artwork { display: block; width: 100%; height: auto; }
+        .location-artwork { position: relative; }
+        .location { position: absolute; left: 35.111%; top: 80%; width: 28.978%; border-radius: 999px; }
+        .location img { display: block; width: 100%; height: auto; border-radius: 999px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+        @media print { .invitation { max-width: none; box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <main class="invitation" id="details-page" aria-label="Somaly and Monyroath wedding invitation">
+        <section class="section" aria-label="Save the date film">
+            <video class="save-the-date" id="save-the-date" width="1080" height="1920" autoplay muted playsinline controls preload="metadata" aria-label="Somaly and Monyroath save the date film">
+                <source src="assets/video/save-the-date.mp4" type="video/mp4">
+                Your browser does not support embedded video. <a href="assets/video/save-the-date.mp4">Watch our save the date film</a>.
+            </video>
+        </section>
+        <section class="section" aria-labelledby="invitation-title">
+            <h1 class="sr-only" id="invitation-title" tabindex="-1">សិរីមង្គលអាពាហ៍ពិពាហ៍ — Somaly &amp; Monyroath</h1>
+            <p class="sr-only">Please join us for our wedding on <time datetime="2026-11-09">9 November 2026</time> at The Grand Terrace, Phnom Penh.</p>
+            <img class="artwork" src="assets/images/WeddingInfo.webp" width="1125" height="1646" fetchpriority="high" alt="សិរីមង្គលអាពាហ៍ពិពាហ៍ — wedding invitation and family names. 9.11.2026, The Grand Terrace.">
+        </section>
+        <section class="section" aria-label="Our wedding photographs">
+            <img class="artwork" src="assets/images/WeddingPic.webp" width="1125" height="3360" decoding="async" alt="Somaly and Monyroath's wedding photo collection, in the garden and outside a yellow colonial building.">
+        </section>
+        <section class="section" aria-label="Wedding program">
+            <img class="artwork" src="assets/images/WeddingDetail.webp" width="1125" height="1428" loading="lazy" decoding="async" alt="កម្មវិធីមង្គលអាពាហ៍ពិពាហ៍ — Khmer wedding schedule for 9 November 2026, with morning ceremonies and the reception at The Grand Terrace.">
+        </section>
+        <section class="section" aria-label="Wedding colors">
+            <img class="artwork" src="assets/images/EventColors.webp" width="1125" height="462" loading="lazy" decoding="async" alt="ពណ៌នៃកម្មវិធី — wedding colors: olive green, golden yellow, and warm brown.">
+        </section>
+        <section class="section" aria-label="Venue location">
+            <div class="location-artwork">
+                <img class="artwork" src="assets/images/Map.webp?v=2" width="1125" height="920" loading="lazy" decoding="async" alt="ទីតាំងកម្មវិធី — map showing The Grand Terrace near Street 273, with the location button below.">
+                <a class="location animated-button" href="https://maps.google.com/?q=The+Grand+Terrace+Phnom+Penh" target="_blank" rel="noopener noreferrer" aria-label="Open The Grand Terrace, Phnom Penh, in Google Maps (opens in a new tab)"><img src="assets/images/LocationButton.png?v=2" width="326" height="108" alt="ទីតាំងកម្មវិធី"></a>
+            </div>
+        </section>
+        <footer>
+            <img class="artwork" src="assets/images/Footer.webp" width="1125" height="532" loading="lazy" decoding="async" alt="With Love, Somaly &amp; Monyroath.">
+        </footer>
+    </main>
+    <audio id="background-music" src="assets/audio/blue.mp3" preload="metadata"></audio>
+    <p class="sr-only" id="music-status" role="status"></p>
+    <script>
+        const music = document.getElementById('background-music');
+        const status = document.getElementById('music-status');
+        const film = document.getElementById('save-the-date');
+        const segmentStart = 3;
+        const segmentEnd = 58;
+        function loopSegment(media) {
+            let timer;
+            const end = () => Number.isFinite(media.duration)
+                ? Math.min(segmentEnd, media.duration) : segmentEnd;
+            function normalize() {
+                if (media.currentTime < segmentStart || media.currentTime >= end()) {
+                    media.currentTime = segmentStart;
+                }
+            }
+            function schedule() {
+                window.clearTimeout(timer);
+                if (media.paused || media.ended) return;
+                timer = window.setTimeout(() => {
+                    if (media.paused) return;
+                    // Check media time so buffering does not shorten the segment.
+                    if (media.currentTime >= end() - .03) media.currentTime = segmentStart;
+                    schedule();
+                }, Math.max(20, (end() - media.currentTime) / media.playbackRate * 1000));
+            }
+            media.addEventListener('loadedmetadata', () => { normalize(); schedule(); });
+            media.addEventListener('play', () => { normalize(); schedule(); });
+            media.addEventListener('playing', schedule);
+            media.addEventListener('pause', () => window.clearTimeout(timer));
+            media.addEventListener('waiting', () => window.clearTimeout(timer));
+            media.addEventListener('seeked', () => { normalize(); schedule(); });
+            media.addEventListener('ratechange', schedule);
+            media.addEventListener('timeupdate', () => {
+                if (!media.paused && media.currentTime >= end()) {
+                    media.currentTime = segmentStart;
+                    schedule();
+                }
+            });
+            media.addEventListener('ended', () => {
+                media.currentTime = segmentStart;
+                media.play().catch(() => {});
+            });
+            normalize();
+        }
+        function silenceFilm() {
+            film.defaultMuted = true;
+            if (!film.muted) film.muted = true;
+            if (film.volume !== 0) film.volume = 0;
+        }
+        silenceFilm();
+        async function playMusic() {
+            film.muted = true;
+            if (music.currentTime < segmentStart || music.currentTime >= segmentEnd || music.ended) {
+                music.currentTime = segmentStart;
+            }
+            try { await music.play(); status.textContent = ''; }
+            catch { status.textContent = 'Tap anywhere on the invitation to start background music.'; }
+        }
+        function startMusicOnInteraction() {
+            if (music.paused) playMusic();
+        }
+        document.addEventListener('pointerdown', startMusicOnInteraction, { once: true });
+        document.addEventListener('keydown', startMusicOnInteraction, { once: true });
+        music.addEventListener('error', () => {
+            status.textContent = 'Background music could not load.';
+        });
+        film.addEventListener('volumechange', silenceFilm);
+        film.addEventListener('play', silenceFilm);
+        film.addEventListener('loadedmetadata', silenceFilm);
+        loopSegment(music);
+        loopSegment(film);
+        playMusic();
+    </script>
+</body>
+</html>
