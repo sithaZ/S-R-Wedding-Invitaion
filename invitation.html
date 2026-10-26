@@ -12,7 +12,6 @@
         [hidden] { display: none !important; }
         body { margin: 0; color: #4e5b22; font-family: 'Segoe UI', sans-serif; }
         .invitation { width: 100%; max-width: 480px; margin-inline: auto; }
-        .save-the-date { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: contain; }
         .section { margin: 0; }
         .artwork { display: block; width: 100%; height: auto; }
         .location-artwork { position: relative; }
@@ -24,11 +23,8 @@
 </head>
 <body>
     <main class="invitation" id="details-page" aria-label="Somaly and Monyroath wedding invitation">
-        <section class="section" aria-label="Save the date film">
-            <video class="save-the-date" id="save-the-date" width="1080" height="1920" autoplay muted playsinline controls preload="metadata" aria-label="Somaly and Monyroath save the date film">
-                <source src="assets/video/save-the-date.mp4" type="video/mp4">
-                Your browser does not support embedded video. <a href="assets/video/save-the-date.mp4">Watch our save the date film</a>.
-            </video>
+        <section class="section" aria-label="Somaly and Monyroath's portrait">
+            <img class="artwork" src="assets/images/couple-portrait-960.webp" srcset="assets/images/couple-portrait-480.webp 480w, assets/images/couple-portrait-960.webp 960w" sizes="(max-width: 480px) 100vw, 480px" width="960" height="1441" fetchpriority="high" alt="Somaly and Monyroath holding hands in traditional gold wedding attire beside an ancient stone temple.">
         </section>
         <section class="section" aria-labelledby="invitation-title">
             <h1 class="sr-only" id="invitation-title" tabindex="-1">សិរីមង្គលអាពាហ៍ពិពាហ៍ — Somaly &amp; Monyroath</h1>
@@ -59,7 +55,6 @@
     <script>
         const music = document.getElementById('background-music');
         const status = document.getElementById('music-status');
-        const film = document.getElementById('save-the-date');
         const segmentStart = 3;
         const segmentEnd = 58;
         function loopSegment(media) {
@@ -100,14 +95,7 @@
             });
             normalize();
         }
-        function silenceFilm() {
-            film.defaultMuted = true;
-            if (!film.muted) film.muted = true;
-            if (film.volume !== 0) film.volume = 0;
-        }
-        silenceFilm();
         async function playMusic() {
-            film.muted = true;
             if (music.currentTime < segmentStart || music.currentTime >= segmentEnd || music.ended) {
                 music.currentTime = segmentStart;
             }
@@ -122,11 +110,7 @@
         music.addEventListener('error', () => {
             status.textContent = 'Background music could not load.';
         });
-        film.addEventListener('volumechange', silenceFilm);
-        film.addEventListener('play', silenceFilm);
-        film.addEventListener('loadedmetadata', silenceFilm);
         loopSegment(music);
-        loopSegment(film);
         playMusic();
     </script>
 </body>
